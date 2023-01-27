@@ -1,6 +1,6 @@
 /**
  * @name fuckGifts
- * @version 1.1.0
+ * @version 1.1.1
  * @description fuck gifts!
  * @author JustTemmie
  *   
@@ -12,10 +12,7 @@ const guildObserver = new MutationObserver(changedGuild);
 function removeGift() {
     var buttons = document.getElementsByClassName("buttons-uaqb-5")[0]
     if (buttons == undefined) {return}
-    buttons = buttons.getElementsByTagName("div");
-    for( let i=0; i< buttons.length; i++ ) {
-        buttons[i].remove()
-    }
+    buttons.remove()
 }
 
 function changedGuild() {

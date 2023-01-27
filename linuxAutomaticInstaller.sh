@@ -24,6 +24,11 @@ fi
 
 printf "installing fuck gifts plugin...\n"
 
+if [ -f "$HOME/.config/BetterDiscord/plugins/fuckGifts.plugin.js" ]; then
+    echo "plugin already installed, deleting the existing one..."
+    rm $HOME/.config/BetterDiscord/plugins/fuckGifts.plugin.js
+fi
+
 # download fuck gifts
 curl -O https://raw.githubusercontent.com/JustTemmie/fuckGifts/main/fuckGifts.plugin.js 
 # move fuck gifts into the right folder
@@ -33,10 +38,10 @@ printf "enabling fuck gifts...\n"
 
 if [[ "$installed" == "n" ]]; then
     # change the active plugins to just be fuck gifts
-    echo '{"fuckGifts": true}' > ~/.config/BetterDiscord/data/stable/plugins.json 
+    echo '{"fuckGifts": true}' > $HOME/.config/BetterDiscord/data/stable/plugins.json 
 else
     # enable the fuck gifts plugin using sed
-    sed -i 's/}/,"fuckGifts":true}/' ~/.config/BetterDiscord/data/stable/plugins.json
+    sed -i 's/}/,"fuckGifts":true}/' $HOME/.config/BetterDiscord/data/stable/plugins.json
 fi
 
 
