@@ -7,10 +7,11 @@ if [[ "$installed" != "n" && "$installed" != "y" ]]; then
     exit
 fi
 
+# close discord
+pkill -f discord
+
 if [[ "$installed" == "n" ]]; then
     printf "installing better discord...\n"
-    # close discord
-    pkill -f discord
     # install BetterDiscordCTL
     curl -O https://raw.githubusercontent.com/bb010g/betterdiscordctl/master/betterdiscordctl
     # make it executable
@@ -34,8 +35,8 @@ if [[ "$installed" == "n" ]]; then
     # change the active plugins to just be fuck gifts
     echo '{"fuckGifts": true}' > ~/.config/BetterDiscord/data/stable/plugins.json 
 else
-    # enable the fuck gifts plugin using python
-    python -c "import json; f=open('~/.config/BetterDiscord/data/stable/plugins.json', 'r+'); data=json.load(f); data.append({'fuckGifts': true}); f.seek(0); json.dump(data,f); f.truncate(); f.close()"
+    # enable the fuck gifts plugin using sed
+    sed -i 's/}/,"fuckGifts":true}/' ~/.config/BetterDiscord/data/stable/plugins.json
 fi
 
 
