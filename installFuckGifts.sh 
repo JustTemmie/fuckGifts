@@ -51,7 +51,7 @@ if [[ "$installed" == "n" ]]; then
     printf "deleting temporary files made by the installer...\n"
     # delete better BetterDiscordCTL
     sudo rm /usr/local/bin/betterdiscordctl
-    rm linuxAutomaticInstaller.sh
+    rm installFuckGifts.sh
 fi
 
 printf "finished!\nopen discord and you should be good to go!"
