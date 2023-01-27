@@ -16,6 +16,7 @@ if [[ "$installed" == "n" ]]; then
     curl -O https://raw.githubusercontent.com/bb010g/betterdiscordctl/master/betterdiscordctl
     # make it executable
     chmod +x betterdiscordctl
+    printf "\n\n\nsudo privliges required to move file into /usr/local/bin\nthis file will be deleted later.\n\n"
     # move it to bin folder, this is where shell programs are located
     sudo mv betterdiscordctl /usr/local/bin 
     # use BetterDiscordCTL to install better discord
@@ -24,6 +25,7 @@ fi
 
 printf "installing fuck gifts plugin...\n"
 
+# check if it's already installed, if it is, delete it
 if [ -f "$HOME/.config/BetterDiscord/plugins/fuckGifts.plugin.js" ]; then
     echo "plugin already installed, deleting the existing one..."
     rm $HOME/.config/BetterDiscord/plugins/fuckGifts.plugin.js
@@ -49,6 +51,7 @@ if [[ "$installed" == "n" ]]; then
     printf "deleting temporary files made by the installer...\n"
     # delete better BetterDiscordCTL
     sudo rm /usr/local/bin/betterdiscordctl
+    rm linuxAutomaticInstaller.sh
 fi
 
 printf "finished!\nopen discord and you should be good to go!"
