@@ -1,4 +1,4 @@
-echo "Do you already have Better Discord installed? (y/n)" 
+echo "Do you already have Better Discord installed? (y/n)"
 
 read -p "> " installed
 
@@ -18,7 +18,7 @@ if [[ "$installed" == "n" ]]; then
     chmod +x betterdiscordctl
     printf "\n\n\nsudo privliges required to move file into /usr/local/bin\nthis file will be deleted later.\n\n"
     # move it to bin folder, this is where shell programs are located
-    sudo mv betterdiscordctl /usr/local/bin 
+    sudo mv betterdiscordctl /usr/local/bin
     # use BetterDiscordCTL to install better discord
     betterdiscordctl install
 fi
@@ -31,16 +31,23 @@ if [ -f "$HOME/.config/BetterDiscord/plugins/fuckGifts.plugin.js" ]; then
     rm $HOME/.config/BetterDiscord/plugins/fuckGifts.plugin.js
 fi
 
+if [ ! -d "$HOME/.config/BetterDiscord/" ]; then
+    mkdir -p "$HOME/.config/BetterDiscord/data/stable/"
+    mkdir -p "$HOME/.config/BetterDiscord/plugins/"
+    touch "$HOME/.config/BetterDiscord/data/stable/plugins.json"
+fi
+
+
 # download fuck gifts
-curl -O https://raw.githubusercontent.com/JustTemmie/fuckGifts/main/fuckGifts.plugin.js 
+curl -O https://raw.githubusercontent.com/JustTemmie/fuckGifts/main/fuckGifts.plugin.js
 # move fuck gifts into the right folder
-mv ~/fuckGifts.plugin.js ~/.config/BetterDiscord/plugins/
+mv fuckGifts.plugin.js ~/.config/BetterDiscord/plugins/
 
 printf "enabling fuck gifts...\n"
 
 if [[ "$installed" == "n" ]]; then
     # change the active plugins to just be fuck gifts
-    echo '{"fuckGifts": true}' > $HOME/.config/BetterDiscord/data/stable/plugins.json 
+    echo '{"fuckGifts": true}' > $HOME/.config/BetterDiscord/data/stable/plugins.json
 else
     # enable the fuck gifts plugin using sed
     sed -i 's/}/,"fuckGifts":true}/' $HOME/.config/BetterDiscord/data/stable/plugins.json
